@@ -61,18 +61,14 @@ const TableBody = styled.tbody``;
 
 const UserTable = () => {
 	let navigate = useNavigate();
-	//const cachedData = useGetCachedData("userData");
+
 	const cachedDataPaginated = useGetCachedData("userDataPaginated");
-	// const { data, isError, isLoading } = useFetchUsers("users", () =>
-	// 	useGetCachedData("userData")
-	// );
 
 	const { data, isError, isLoading, isFetching, fetchNextPage } =
 		useFetchUsersPaginated("userDataPaginated", () =>
 			useGetCachedData("userDataPaginated")
 		);
 
-	// const [modifiedUserList, setModifiedUserList] = useState([]);
 	const [modifiedUserListPaginated, setModifiedUserListPaginated] = useState(
 		[]
 	);
@@ -81,20 +77,6 @@ const UserTable = () => {
 	const arrowDirection = order === "asc" ? "\u2193" : "\u2191";
 	const tableHeaders = headerData;
 	const lastElementRef = useRef();
-
-	// useEffect(() => {
-	// 	if (data && !isError) {
-	// 		localStorage.setItem("userData", JSON.stringify(data));
-	// 		setModifiedUserList(() => {
-	// 			return data.results;
-	// 		});
-	// 	} else if (cachedData) {
-	// 		setModifiedUserList(() => {
-	// 			return cachedData.results;
-	// 		});
-	// 	}
-	// 	return () => {};
-	// }, [data?.results[0]]);
 
 	useEffect(() => {
 		if (data || cachedDataPaginated) {
